@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title>
+            <%=locals.title%>
+        </title>
+        <link rel="stylesheet" href="/home.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    </head>
+    <body>
+        <div id="outer-box">
+        <h1>ToDo App</h1>
+        <form action="/create-task" method="POST">
+            <h2>Description</h2>
+            <input type="text" id="description-box" name="name" placeholder="What do you want to do?" required>
+            <h2>Category</h2>
+            <select  id="drop-down" name="category" required>
+                <option hidden value="">Choose a category</option>
+                <option value="Personal">Personal</option>
+                <option value="Work">Work</option>
+                <option value="School">School</option>
+                <option value="Cleaning">Cleaning</option>
+                <option value="Other">Other</option>
+            </select>
+            <h2>Due Date</h2>
+            <input id="date-select" type="date" name="date" required>
+            <button id="add-task-button" type="submit"><i class="fas fa-plus"></i> Add Task</button>
+        </form>
+        <div>
+            <ul id="task-list">
+                <% for(let i of todo_list){%>
+                    <li class="task">
+                        <hr>
+                        <div class="details">
+                            <div id="name-and-date">
+                                <p id="list-name"><%= i.name%></p>
+                                <i class="far fa-calendar-alt"></i>
+                                
+                                <p id="list-date"><%= i.date%></p>
+                            </div>
+                            <p id="list-category"><%= i.category%></p>
+                        </div>
+                        <div class="done-button">
+                            <a href="/done-task/?id=<%=i._id%>">
+                                <button id="done"><i class="fas fa-trash-alt"></i> Delete task</button>
+                            </a>
+                        </div>
+                    </li>
+                <%}%>
+            </ul>
+        </div>
+        </div>
+    </body>
+</html>
